@@ -2,5 +2,8 @@
 	"name": "vasek-purchart/phing-symfony-command-task",
 	"description": "This Phing task allows you to call commands from a Symfony Console Application comfortably.",
 	"keywords": ["phing", "task", "symfony", "command", "console"],
-	"license": "MIT"
+	"license": "MIT",
+	"require": {
+		"phing/phing": "~2.7.0"
+	}
 }
