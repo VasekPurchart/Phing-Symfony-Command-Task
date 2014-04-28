@@ -15,11 +15,22 @@ class SymfonyCommand extends \ExecTask
 	/** @var boolean use passtru by default to enable continuous output */
 	protected $passthru = true;
 
+	/** @var string */
+	private $executable;
+
 	/** @var string path tu symfony application executable */
 	private $app;
 
 	/** @var string|null which command to run */
 	private $cmd;
+
+	/**
+	 * @param string $executable
+	 */
+	public function setExecutable($executable)
+	{
+		$this->executable = $executable;
+	}
 
 	/**
 	 * @param string $app
