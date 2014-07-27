@@ -4,6 +4,6 @@
 	"keywords": ["phing", "task", "symfony", "command", "console"],
 	"license": "MIT",
 	"require": {
-		"phing/phing": "~2.7.0"
+		"phing/phing": "~2.8.0"
 	}
 }
