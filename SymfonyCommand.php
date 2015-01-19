@@ -18,7 +18,7 @@ class SymfonyCommand extends \ExecTask
 	/** @var string */
 	private $executable;
 
-	/** @var string path tu symfony application executable */
+	/** @var string path to Symfony application executable */
 	private $app;
 
 	/** @var string|null which command to run */

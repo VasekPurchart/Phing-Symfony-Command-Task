@@ -42,7 +42,7 @@ Installation
 
 Install with composer, add require for `vasek-purchart/phing-symfony-command-task`.
 
-You have to register this task under a name of your choosing. 
+You have to register this task under a name of your choosing.
 There are several ways how to register a task, see the `TaskDefTask` docummentation.
 The recommended way is putting this in your `build.xml` (change the path accordingly to your setup).
 
