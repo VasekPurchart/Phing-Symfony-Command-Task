@@ -44,10 +44,10 @@ Install with composer, add require for `vasek-purchart/phing-symfony-command-tas
 
 You have to register this task under a name of your choosing.
 There are several ways how to register a task, see the `TaskDefTask` docummentation.
-The recommended way is putting this in your `build.xml` (change the path accordingly to your setup).
+The recommended way is putting this in your `build.xml`.
 
 ```xml
-<taskdef name="symfony-cmd" classname="SymfonyCommand" classpath="${project.basedir}/vendor/vasek-purchart/phing-symfony-command-task"/>
+<taskdef name="symfony-cmd" classname="SymfonyCommand"/>
 ```
 You can pick any other name for the command if you would like to.
 
