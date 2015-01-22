@@ -3,6 +3,13 @@
 	"description": "This Phing task allows you to call commands from a Symfony Console Application comfortably.",
 	"keywords": ["phing", "task", "symfony", "command", "console"],
 	"license": "MIT",
+	"authors": [
+		{
+			"name": "Vašek Purchart",
+			"email": "me@vasekpurchart.cz",
+			"homepage": "http://vasekpurchart.cz"
+		}
+	],
 	"require": {
 		"phing/phing": "~2.8"
 	},
