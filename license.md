@@ -8,7 +8,7 @@ you have to include this license in the part itself.
 The MIT License (MIT)
 ---------------------
 
-Copyright (c) 2014 Vašek Purchart
+Copyright (c) 2014-2015 Vašek Purchart
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
