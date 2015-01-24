@@ -1,9 +1,9 @@
-Licence
+License
 =======
 
-This work is published under the MIT licence (see full statement below).
+This work is published under the MIT license (see full statement below).
 If you want to deal (as described below) only with a part of this work,
-you have to include this licence in the part itself.
+you have to include this license in the part itself.
 
 The MIT License (MIT)
 ---------------------
