@@ -39,8 +39,11 @@ If you want to pass any additional parameters, you can use `<arg>` elements to d
 
 Installation
 -----------
+Install package [`vasek-purchart/phing-symfony-command-task`](https://packagist.org/packages/vasek-purchart/phing-symfony-command-task) with [Composer](https://getcomposer.org/):
 
-Install with composer, add require for `vasek-purchart/phing-symfony-command-task`.
+```bash
+composer require vasek-purchart/phing-symfony-command-task
+```
 
 You have to register this task under a name of your choosing.
 There are several ways how to register a task, see the `TaskDefTask` docummentation.
