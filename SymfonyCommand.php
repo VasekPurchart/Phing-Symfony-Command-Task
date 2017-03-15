@@ -1,8 +1,5 @@
 <?php
 
-/**
- * @author Vašek Purchart
- */
 class SymfonyCommand extends \ExecTask
 {
 
@@ -15,10 +12,10 @@ class SymfonyCommand extends \ExecTask
 	/** @var boolean use passtru by default to enable continuous output */
 	protected $passthru = true;
 
-	/** @var string */
+	/** @var string|null */
 	private $executable;
 
-	/** @var string path to Symfony application executable */
+	/** @var string|null path to Symfony application executable */
 	private $app;
 
 	/** @var string|null which command to run */
@@ -53,7 +50,7 @@ class SymfonyCommand extends \ExecTask
 		if ($this->app === null) {
 			$defaultApp = $this->getProject()->getProperty(self::PROPERTY_DEFAULT_APP);
 			if ($defaultApp === null) {
-				throw new \BuildException('Parameter app  is required for SymfonyCommand');
+				throw new \BuildException('Parameter "app" is required for SymfonyCommand');
 			}
 			$this->app = $defaultApp;
 		}

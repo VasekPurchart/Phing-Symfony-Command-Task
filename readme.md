@@ -38,7 +38,7 @@ If you want to pass any additional parameters, you can use `<arg>` elements to d
 ```
 
 Installation
------------
+------------
 Install package [`vasek-purchart/phing-symfony-command-task`](https://packagist.org/packages/vasek-purchart/phing-symfony-command-task) with [Composer](https://getcomposer.org/):
 
 ```bash
