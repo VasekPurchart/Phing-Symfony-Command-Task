@@ -2,7 +2,11 @@
 
 declare(strict_types = 1);
 
-class SymfonyCommand extends \ExecTask
+namespace VasekPurchart\Phing\SymfonyCommand;
+
+use CommandlineArgument;
+
+class SymfonyCommandTask extends \ExecTask
 {
 
 	const PROPERTY_DEFAULT_EXECUTABLE = 'symfony-command.default.executable';

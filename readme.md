@@ -50,7 +50,7 @@ There are several ways how to register a task, see the `TaskDefTask` docummentat
 The recommended way is putting this in your `build.xml`.
 
 ```xml
-<taskdef name="symfony-cmd" classname="SymfonyCommand"/>
+<taskdef name="symfony-cmd" classname="VasekPurchart\Phing\SymfonyCommand\SymfonyCommandTask"/>
 ```
 You can pick any other name for the command if you would like to.
 

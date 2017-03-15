@@ -12,9 +12,16 @@
 	],
 	"require": {
 		"php": "~7.0",
-		"phing/phing": "~2.8"
+		"phing/phing": "~2.16"
 	},
 	"autoload": {
-		"psr-0": { "SymfonyCommand": "" }
+		"psr-4": {
+			"VasekPurchart\\Phing\\SymfonyCommand\\": [
+				"src"
+			]
+		},
+		"classmap": [
+			"src"
+		]
 	}
 }
