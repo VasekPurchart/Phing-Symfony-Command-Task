@@ -23,5 +23,8 @@
 		"classmap": [
 			"src"
 		]
+	},
+	"config": {
+		"bin-dir": "bin"
 	}
 }
