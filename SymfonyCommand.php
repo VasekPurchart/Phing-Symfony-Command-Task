@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 class SymfonyCommand extends \ExecTask
 {
 
@@ -29,18 +31,12 @@ class SymfonyCommand extends \ExecTask
 		$this->executable = $executable;
 	}
 
-	/**
-	 * @param string $app
-	 */
-	public function setApp($app)
+	public function setApp(string $app)
 	{
 		$this->app = $app;
 	}
 
-	/**
-	 * @param string $cmd
-	 */
-	public function setCmd($cmd)
+	public function setCmd(string $cmd)
 	{
 		$this->cmd = $cmd;
 	}
@@ -74,10 +70,7 @@ class SymfonyCommand extends \ExecTask
 		parent::main();
 	}
 
-	/**
-	 * @return \CommandlineArgument
-	 */
-	private function createAppArgument()
+	private function createAppArgument(): CommandlineArgument
 	{
 		$argument = new CommandlineArgument($this->commandline);
 		$argument->setPath($this->app);
@@ -85,10 +78,7 @@ class SymfonyCommand extends \ExecTask
 		return $argument;
 	}
 
-	/**
-	 * @return \CommandlineArgument
-	 */
-	private function createCmdArgument()
+	private function createCmdArgument(): CommandlineArgument
 	{
 		$argument = new CommandlineArgument($this->commandline);
 		$argument->setValue($this->cmd);

@@ -11,6 +11,7 @@
 		}
 	],
 	"require": {
+		"php": "~7.0",
 		"phing/phing": "~2.8"
 	},
 	"autoload": {
