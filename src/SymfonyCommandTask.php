@@ -33,6 +33,7 @@ class SymfonyCommandTask extends \ExecTask
 	public function setExecutable($executable)
 	{
 		$this->executable = $executable;
+		parent::setExecutable($executable);
 	}
 
 	public function setApp(string $app)
