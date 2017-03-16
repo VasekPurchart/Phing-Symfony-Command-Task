@@ -1,0 +1,20 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types = 1);
+
+use Symfony\Component\Console\Application;
+use Symfony\Component\Debug\Debug;
+
+use VasekPurchart\Phing\SymfonyCommand\HelloWorldCommand;
+
+set_time_limit(0);
+
+require __DIR__ . '/../vendor/autoload.php';
+
+Debug::enable();
+
+
+$application = new Application();
+$application->add(new HelloWorldCommand());
+$application->run();

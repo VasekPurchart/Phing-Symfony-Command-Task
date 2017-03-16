@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="SymfonyCommandTaskIntegrationTest" default="test">
+
+	<property file="${project.basedir}/symfony-command-task-integration-test.local.properties"/>
+
+	<taskdef name="symfony-cmd" classname="VasekPurchart\Phing\SymfonyCommand\SymfonyCommandTask"/>
+
+	<target name="testCallCommand">
+		<property name="testCallCommand.default.app" value="${project.basedir}/console"/>
+		<property name="symfony-command.default.app" value="${testCallCommand.default.app}"/>
+
+		<property name="testCallCommand.default.executable" value="php"/>
+		<property name="symfony-command.default.executable" value="${testCallCommand.default.executable}"/>
+
+		<symfony-cmd cmd="hello:world"/>
+	</target>
+
+	<target name="testCallCommandWithCustomExecutable">
+		<property name="testCallCommandWithCustomExecutable.default.app" value="${project.basedir}/console"/>
+		<property name="symfony-command.default.app" value="${testCallCommandWithCustomExecutable.default.app}"/>
+
+		<property name="testCallCommandWithCustomApp.test.executable" value="php"/>
+
+		<symfony-cmd executable="${testCallCommandWithCustomApp.test.executable}" cmd="hello:world"/>
+	</target>
+
+	<target name="testCallCommandWithCustomApp">
+		<property name="testCallCommandWithCustomApp.default.executable" value="php"/>
+		<property name="symfony-command.default.executable" value="${testCallCommandWithCustomApp.default.executable}"/>
+
+		<property name="testCallCommandWithCustomApp.test.app" value="${project.basedir}/console"/>
+
+		<symfony-cmd app="${testCallCommandWithCustomApp.test.app}" cmd="hello:world"/>
+	</target>
+
+	<target name="testCallCommandWithCustomExecutableAndApp">
+		<property name="testCallCommandWithCustomExecutableAndApp.test.app" value="${project.basedir}/console"/>
+		<property name="testCallCommandWithCustomExecutableAndApp.test.executable" value="php"/>
+
+		<symfony-cmd
+			executable="${testCallCommandWithCustomExecutableAndApp.test.executable}"
+			app="${testCallCommandWithCustomExecutableAndApp.test.app}"
+			cmd="hello:world"
+		/>
+	</target>
+
+	<target name="testCallCommandWithAppAsExecutable">
+		<property name="testCallCommandWithAppAsExecutable.test.app" value="${project.basedir}/console"/>
+
+		<symfony-cmd app="${testCallCommandWithAppAsExecutable.test.app}" cmd="hello:world"/>
+	</target>
+
+	<target name="testCallCommandAndOverrideDefaults">
+		<property name="symfony-command.default.app" value="XXX"/>
+
+		<property name="symfony-command.default.executable" value="YYY"/>
+
+		<property name="testCallCommandAndOverrideDefaults.test.app" value="${project.basedir}/console"/>
+		<property name="testCallCommandAndOverrideDefaults.test.executable" value="php"/>
+
+		<symfony-cmd
+			executable="${testCallCommandAndOverrideDefaults.test.executable}"
+			app="${testCallCommandAndOverrideDefaults.test.app}"
+			cmd="hello:world"
+		/>
+	</target>
+
+	<target name="testMissingApp">
+		<symfony-cmd cmd="hello:world"/>
+	</target>
+
+</project>
