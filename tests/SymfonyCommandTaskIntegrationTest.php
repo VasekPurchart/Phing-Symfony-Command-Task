@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace VasekPurchart\Phing\SymfonyCommand;
 
 use Project;
-
 use VasekPurchart\Phing\PhingTester\PhingTester;
 
 class SymfonyCommandTaskIntegrationTest extends \PHPUnit\Framework\TestCase

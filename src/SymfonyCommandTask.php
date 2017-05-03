@@ -12,10 +12,10 @@ class SymfonyCommandTask extends \ExecTask
 	const PROPERTY_DEFAULT_EXECUTABLE = 'symfony-command.default.executable';
 	const PROPERTY_DEFAULT_APP = 'symfony-command.default.app';
 
-	/** @var boolean check return code by default */
+	/** @var bool check return code by default */
 	protected $checkreturn = true;
 
-	/** @var boolean use passtru by default to enable continuous output */
+	/** @var bool use passtru by default to enable continuous output */
 	protected $passthru = true;
 
 	/** @var string|null */
