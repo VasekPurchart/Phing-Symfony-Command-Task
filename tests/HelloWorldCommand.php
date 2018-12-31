@@ -10,9 +10,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 class HelloWorldCommand extends \Symfony\Component\Console\Command\Command
 {
 
-	const NAME = 'hello:world';
+	public const NAME = 'hello:world';
 
-	protected function configure()
+	protected function configure(): void
 	{
 		$this->setName(self::NAME);
 		$description = 'Hello world test command';
@@ -20,7 +20,7 @@ class HelloWorldCommand extends \Symfony\Component\Console\Command\Command
 		$this->setHelp($description);
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output)
+	protected function execute(InputInterface $input, OutputInterface $output): void
 	{
 		// empty
 	}

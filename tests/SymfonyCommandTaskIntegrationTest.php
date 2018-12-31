@@ -10,7 +10,7 @@ use VasekPurchart\Phing\PhingTester\PhingTester;
 class SymfonyCommandTaskIntegrationTest extends \PHPUnit\Framework\TestCase
 {
 
-	public function testCallCommand()
+	public function testCallCommand(): void
 	{
 		$tester = new PhingTester(__DIR__ . '/symfony-command-task-integration-test.xml');
 		$target = __FUNCTION__;
@@ -23,7 +23,7 @@ class SymfonyCommandTaskIntegrationTest extends \PHPUnit\Framework\TestCase
 		), $target, Project::MSG_VERBOSE);
 	}
 
-	public function testCallCommandWithCustomExecutable()
+	public function testCallCommandWithCustomExecutable(): void
 	{
 		$tester = new PhingTester(__DIR__ . '/symfony-command-task-integration-test.xml');
 		$target = __FUNCTION__;
@@ -36,7 +36,7 @@ class SymfonyCommandTaskIntegrationTest extends \PHPUnit\Framework\TestCase
 		), $target, Project::MSG_VERBOSE);
 	}
 
-	public function testCallCommandWithCustomApp()
+	public function testCallCommandWithCustomApp(): void
 	{
 		$tester = new PhingTester(__DIR__ . '/symfony-command-task-integration-test.xml');
 		$target = __FUNCTION__;
@@ -49,7 +49,7 @@ class SymfonyCommandTaskIntegrationTest extends \PHPUnit\Framework\TestCase
 		), $target, Project::MSG_VERBOSE);
 	}
 
-	public function testCallCommandWithCustomExecutableAndApp()
+	public function testCallCommandWithCustomExecutableAndApp(): void
 	{
 		$tester = new PhingTester(__DIR__ . '/symfony-command-task-integration-test.xml');
 		$target = __FUNCTION__;
@@ -62,7 +62,7 @@ class SymfonyCommandTaskIntegrationTest extends \PHPUnit\Framework\TestCase
 		), $target, Project::MSG_VERBOSE);
 	}
 
-	public function testCallCommandWithAppAsExecutable()
+	public function testCallCommandWithAppAsExecutable(): void
 	{
 		$tester = new PhingTester(__DIR__ . '/symfony-command-task-integration-test.xml');
 		$target = __FUNCTION__;
@@ -74,7 +74,7 @@ class SymfonyCommandTaskIntegrationTest extends \PHPUnit\Framework\TestCase
 		), $target, Project::MSG_VERBOSE);
 	}
 
-	public function testCallCommandAndOverrideDefaults()
+	public function testCallCommandAndOverrideDefaults(): void
 	{
 		$tester = new PhingTester(__DIR__ . '/symfony-command-task-integration-test.xml');
 		$target = __FUNCTION__;
@@ -87,7 +87,7 @@ class SymfonyCommandTaskIntegrationTest extends \PHPUnit\Framework\TestCase
 		), $target, Project::MSG_VERBOSE);
 	}
 
-	public function testMissingApp()
+	public function testMissingApp(): void
 	{
 		$tester = new PhingTester(__DIR__ . '/symfony-command-task-integration-test.xml');
 		$target = __FUNCTION__;

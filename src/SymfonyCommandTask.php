@@ -9,8 +9,8 @@ use CommandlineArgument;
 class SymfonyCommandTask extends \ExecTask
 {
 
-	const PROPERTY_DEFAULT_EXECUTABLE = 'symfony-command.default.executable';
-	const PROPERTY_DEFAULT_APP = 'symfony-command.default.app';
+	public const PROPERTY_DEFAULT_EXECUTABLE = 'symfony-command.default.executable';
+	public const PROPERTY_DEFAULT_APP = 'symfony-command.default.app';
 
 	/** @var bool check return code by default */
 	protected $checkreturn = true;
@@ -30,23 +30,23 @@ class SymfonyCommandTask extends \ExecTask
 	/**
 	 * @param string $executable
 	 */
-	public function setExecutable($executable)
+	public function setExecutable($executable): void
 	{
 		$this->executable = $executable;
 		parent::setExecutable($executable);
 	}
 
-	public function setApp(string $app)
+	public function setApp(string $app): void
 	{
 		$this->app = $app;
 	}
 
-	public function setCmd(string $cmd)
+	public function setCmd(string $cmd): void
 	{
 		$this->cmd = $cmd;
 	}
 
-	public function main()
+	public function main(): void
 	{
 		if ($this->app === null) {
 			$defaultApp = $this->getProject()->getProperty(self::PROPERTY_DEFAULT_APP);
