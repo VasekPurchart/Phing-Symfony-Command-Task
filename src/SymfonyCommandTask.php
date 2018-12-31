@@ -28,6 +28,8 @@ class SymfonyCommandTask extends \ExecTask
 	private $cmd;
 
 	/**
+	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
+	 *
 	 * @param string $executable
 	 */
 	public function setExecutable($executable): void

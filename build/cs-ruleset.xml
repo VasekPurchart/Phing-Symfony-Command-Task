@@ -3,10 +3,10 @@
 	<rule ref="../vendor/consistence/coding-standard/Consistence/ruleset.xml"/>
 	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
 		<properties>
-			<property name="rootNamespaces" type="array" value="
-				src => VasekPurchart\Phing\SymfonyCommand,
-				tests => VasekPurchart\Phing\SymfonyCommand,
-			"/>
+			<property name="rootNamespaces" type="array">
+				<element key="src" value="VasekPurchart\Phing\SymfonyCommand"/>
+				<element key="tests" value="VasekPurchart\Phing\SymfonyCommand"/>
+			</property>
 		</properties>
 		<exclude-pattern>*/data/*.php</exclude-pattern>
 		<exclude-pattern>*/exceptions/*Exception.php</exclude-pattern>
