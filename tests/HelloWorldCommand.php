@@ -20,9 +20,9 @@ class HelloWorldCommand extends \Symfony\Component\Console\Command\Command
 		$this->setHelp($description);
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output): void
+	protected function execute(InputInterface $input, OutputInterface $output): int
 	{
-		// empty
+		return 0;
 	}
 
 }

@@ -93,7 +93,7 @@ class SymfonyCommandTaskIntegrationTest extends \PHPUnit\Framework\TestCase
 		$target = __FUNCTION__;
 
 		$this->expectException(\BuildException::class);
-		$this->expectExceptionMessageRegExp('~app.+required~');
+		$this->expectExceptionMessageMatches('~app.+required~');
 
 		$tester->executeTarget($target);
 	}
