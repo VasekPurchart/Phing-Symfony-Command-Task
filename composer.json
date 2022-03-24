@@ -18,10 +18,10 @@
 		"consistence/coding-standard": "3.7",
 		"php-parallel-lint/php-console-highlighter": "1.0",
 		"php-parallel-lint/php-parallel-lint": "1.3.2",
-		"phpunit/phpunit": "7.5.1",
+		"phpunit/phpunit": "8.5.25",
 		"symfony/console": "~4.0",
 		"symfony/debug": "~4.0",
-		"vasek-purchart/phing-tester": "2.0"
+		"vasek-purchart/phing-tester": "2.1"
 	},
 	"autoload": {
 		"psr-4": {
