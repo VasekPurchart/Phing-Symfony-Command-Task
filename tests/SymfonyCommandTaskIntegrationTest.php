@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace VasekPurchart\Phing\SymfonyCommand;
 
+use Generator;
 use PHPUnit\Framework\Assert;
 use Project;
 use VasekPurchart\Phing\PhingTester\PhingTester;
@@ -11,55 +12,82 @@ use VasekPurchart\Phing\PhingTester\PhingTester;
 class SymfonyCommandTaskIntegrationTest extends \PHPUnit\Framework\TestCase
 {
 
-	public function testCallCommand(): void
+	/**
+	 * @return mixed[][]|\Generator
+	 */
+	public function callCommandDataProvider(): Generator
 	{
-		$tester = new PhingTester(__DIR__ . '/symfony-command-task-integration-test.xml');
-		$target = __FUNCTION__;
-		$tester->executeTarget($target);
+		yield 'call command' => (static function (): array {
+			$target = 'testCallCommand';
 
-		$tester->assertLogMessageRegExp(sprintf(
-			'~executing.+%s.+%s.+hello:world~i',
-			$tester->getProject()->getProperty(__FUNCTION__ . '.default.executable'),
-			$tester->getProject()->getProperty(__FUNCTION__ . '.default.app')
-		), $target, Project::MSG_VERBOSE);
+			return [
+				'target' => $target,
+				'propertyNameWithExpectedExecutable' => $target . '.default.executable',
+				'propertyNameWithExpectedApp' => $target . '.default.app',
+			];
+		})();
+
+		yield 'call command with custom executable' => (static function (): array {
+			$target = 'testCallCommandWithCustomExecutable';
+
+			return [
+				'target' => $target,
+				'propertyNameWithExpectedExecutable' => $target . '.test.executable',
+				'propertyNameWithExpectedApp' => $target . '.default.app',
+			];
+		})();
+
+		yield 'call command with custom app' => (static function (): array {
+			$target = 'testCallCommandWithCustomApp';
+
+			return [
+				'target' => $target,
+				'propertyNameWithExpectedExecutable' => $target . '.default.executable',
+				'propertyNameWithExpectedApp' => $target . '.test.app',
+			];
+		})();
+
+		yield 'call command with custom executable and app' => (static function (): array {
+			$target = 'testCallCommandWithCustomExecutableAndApp';
+
+			return [
+				'target' => $target,
+				'propertyNameWithExpectedExecutable' => $target . '.test.executable',
+				'propertyNameWithExpectedApp' => $target . '.test.app',
+			];
+		})();
+
+		yield 'call command and override defaults' => (static function (): array {
+			$target = 'testCallCommandAndOverrideDefaults';
+
+			return [
+				'target' => $target,
+				'propertyNameWithExpectedExecutable' => $target . '.test.executable',
+				'propertyNameWithExpectedApp' => $target . '.test.app',
+			];
+		})();
 	}
 
-	public function testCallCommandWithCustomExecutable(): void
+	/**
+	 * @dataProvider callCommandDataProvider
+	 *
+	 * @param string $target
+	 * @param string $propertyNameWithExpectedExecutable
+	 * @param string $propertyNameWithExpectedApp
+	 */
+	public function testCallCommand(
+		string $target,
+		string $propertyNameWithExpectedExecutable,
+		string $propertyNameWithExpectedApp
+	): void
 	{
 		$tester = new PhingTester(__DIR__ . '/symfony-command-task-integration-test.xml');
-		$target = __FUNCTION__;
 		$tester->executeTarget($target);
 
 		$tester->assertLogMessageRegExp(sprintf(
 			'~executing.+%s.+%s.+hello:world~i',
-			$tester->getProject()->getProperty(__FUNCTION__ . '.test.executable'),
-			$tester->getProject()->getProperty(__FUNCTION__ . '.default.app')
-		), $target, Project::MSG_VERBOSE);
-	}
-
-	public function testCallCommandWithCustomApp(): void
-	{
-		$tester = new PhingTester(__DIR__ . '/symfony-command-task-integration-test.xml');
-		$target = __FUNCTION__;
-		$tester->executeTarget($target);
-
-		$tester->assertLogMessageRegExp(sprintf(
-			'~executing.+%s.+%s.+hello:world~i',
-			$tester->getProject()->getProperty(__FUNCTION__ . '.default.executable'),
-			$tester->getProject()->getProperty(__FUNCTION__ . '.test.app')
-		), $target, Project::MSG_VERBOSE);
-	}
-
-	public function testCallCommandWithCustomExecutableAndApp(): void
-	{
-		$tester = new PhingTester(__DIR__ . '/symfony-command-task-integration-test.xml');
-		$target = __FUNCTION__;
-		$tester->executeTarget($target);
-
-		$tester->assertLogMessageRegExp(sprintf(
-			'~executing.+%s.+%s.+hello:world~i',
-			$tester->getProject()->getProperty(__FUNCTION__ . '.test.executable'),
-			$tester->getProject()->getProperty(__FUNCTION__ . '.test.app')
+			$tester->getProject()->getProperty($propertyNameWithExpectedExecutable),
+			$tester->getProject()->getProperty($propertyNameWithExpectedApp)
 		), $target, Project::MSG_VERBOSE);
 	}
 
@@ -71,19 +99,6 @@ class SymfonyCommandTaskIntegrationTest extends \PHPUnit\Framework\TestCase
 
 		$tester->assertLogMessageRegExp(sprintf(
 			'~executing.+%s.+hello:world~i',
-			$tester->getProject()->getProperty(__FUNCTION__ . '.test.app')
-		), $target, Project::MSG_VERBOSE);
-	}
-
-	public function testCallCommandAndOverrideDefaults(): void
-	{
-		$tester = new PhingTester(__DIR__ . '/symfony-command-task-integration-test.xml');
-		$target = __FUNCTION__;
-		$tester->executeTarget($target);
-
-		$tester->assertLogMessageRegExp(sprintf(
-			'~executing.+%s.+%s.+hello:world~i',
-			$tester->getProject()->getProperty(__FUNCTION__ . '.test.executable'),
 			$tester->getProject()->getProperty(__FUNCTION__ . '.test.app')
 		), $target, Project::MSG_VERBOSE);
 	}
