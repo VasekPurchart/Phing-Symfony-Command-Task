@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace VasekPurchart\Phing\SymfonyCommand;
 
+use PHPUnit\Framework\Assert;
 use Project;
 use VasekPurchart\Phing\PhingTester\PhingTester;
 
@@ -89,13 +90,17 @@ class SymfonyCommandTaskIntegrationTest extends \PHPUnit\Framework\TestCase
 
 	public function testMissingApp(): void
 	{
-		$tester = new PhingTester(__DIR__ . '/symfony-command-task-integration-test.xml');
+		$buildFilePath = __DIR__ . '/symfony-command-task-integration-test.xml';
+		$tester = new PhingTester($buildFilePath);
 		$target = __FUNCTION__;
 
-		$this->expectException(\BuildException::class);
-		$this->expectExceptionMessageMatches('~app.+required~');
-
-		$tester->executeTarget($target);
+		try {
+			$tester->executeTarget($target);
+			Assert::fail('Exception expected');
+		} catch (\BuildException $e) {
+			Assert::assertStringStartsWith($buildFilePath, $e->getLocation()->toString());
+			Assert::assertRegExp('~app.+required~', $e->getMessage());
+		}
 	}
 
 }
