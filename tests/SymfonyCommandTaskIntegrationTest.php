@@ -18,7 +18,7 @@ class SymfonyCommandTaskIntegrationTest extends \PHPUnit\Framework\TestCase
 	public function callCommandDataProvider(): Generator
 	{
 		yield 'call command' => (static function (): array {
-			$target = 'testCallCommand';
+			$target = 'call-command';
 
 			return [
 				'target' => $target,
@@ -28,7 +28,7 @@ class SymfonyCommandTaskIntegrationTest extends \PHPUnit\Framework\TestCase
 		})();
 
 		yield 'call command with custom executable' => (static function (): array {
-			$target = 'testCallCommandWithCustomExecutable';
+			$target = 'call-command-with-custom-executable';
 
 			return [
 				'target' => $target,
@@ -38,7 +38,7 @@ class SymfonyCommandTaskIntegrationTest extends \PHPUnit\Framework\TestCase
 		})();
 
 		yield 'call command with custom app' => (static function (): array {
-			$target = 'testCallCommandWithCustomApp';
+			$target = 'call-command-with-custom-app';
 
 			return [
 				'target' => $target,
@@ -48,7 +48,7 @@ class SymfonyCommandTaskIntegrationTest extends \PHPUnit\Framework\TestCase
 		})();
 
 		yield 'call command with custom executable and app' => (static function (): array {
-			$target = 'testCallCommandWithCustomExecutableAndApp';
+			$target = 'call-command-with-custom-executable-and-app';
 
 			return [
 				'target' => $target,
@@ -58,7 +58,7 @@ class SymfonyCommandTaskIntegrationTest extends \PHPUnit\Framework\TestCase
 		})();
 
 		yield 'call command and override defaults' => (static function (): array {
-			$target = 'testCallCommandAndOverrideDefaults';
+			$target = 'call-command-and-override-defaults';
 
 			return [
 				'target' => $target,
@@ -94,12 +94,12 @@ class SymfonyCommandTaskIntegrationTest extends \PHPUnit\Framework\TestCase
 	public function testCallCommandWithAppAsExecutable(): void
 	{
 		$tester = new PhingTester(__DIR__ . '/symfony-command-task-integration-test.xml');
-		$target = __FUNCTION__;
+		$target = 'call-command-with-app-as-executable';
 		$tester->executeTarget($target);
 
 		$tester->assertLogMessageRegExp(sprintf(
 			'~executing.+%s.+hello:world~i',
-			$tester->getProject()->getProperty(__FUNCTION__ . '.test.app')
+			$tester->getProject()->getProperty($target . '.test.app')
 		), $target, Project::MSG_VERBOSE);
 	}
 
@@ -107,7 +107,7 @@ class SymfonyCommandTaskIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 		$buildFilePath = __DIR__ . '/symfony-command-task-integration-test.xml';
 		$tester = new PhingTester($buildFilePath);
-		$target = __FUNCTION__;
+		$target = 'missing-app';
 
 		try {
 			$tester->executeTarget($target);
