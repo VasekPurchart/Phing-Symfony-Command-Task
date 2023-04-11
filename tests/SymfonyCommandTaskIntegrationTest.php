@@ -4,98 +4,127 @@ declare(strict_types = 1);
 
 namespace VasekPurchart\Phing\SymfonyCommand;
 
+use Consistence\Type\Type;
+use Generator;
+use PHPUnit\Framework\Assert;
 use Project;
 use VasekPurchart\Phing\PhingTester\PhingTester;
 
 class SymfonyCommandTaskIntegrationTest extends \PHPUnit\Framework\TestCase
 {
 
-	public function testCallCommand(): void
+	/**
+	 * @return mixed[][]|\Generator
+	 */
+	public function callCommandDataProvider(): Generator
 	{
-		$tester = new PhingTester(__DIR__ . '/symfony-command-task-integration-test.xml');
-		$target = __FUNCTION__;
-		$tester->executeTarget($target);
+		yield 'call command' => (static function (): array {
+			$target = 'call-command';
 
-		$tester->assertLogMessageRegExp(sprintf(
-			'~executing.+%s.+%s.+hello:world~i',
-			$tester->getProject()->getProperty(__FUNCTION__ . '.default.executable'),
-			$tester->getProject()->getProperty(__FUNCTION__ . '.default.app')
-		), $target, Project::MSG_VERBOSE);
+			return [
+				'target' => $target,
+				'propertyNameWithExpectedExecutable' => $target . '.default.executable',
+				'propertyNameWithExpectedApp' => $target . '.default.app',
+			];
+		})();
+
+		yield 'call command with custom executable' => (static function (): array {
+			$target = 'call-command-with-custom-executable';
+
+			return [
+				'target' => $target,
+				'propertyNameWithExpectedExecutable' => $target . '.test.executable',
+				'propertyNameWithExpectedApp' => $target . '.default.app',
+			];
+		})();
+
+		yield 'call command with custom app' => (static function (): array {
+			$target = 'call-command-with-custom-app';
+
+			return [
+				'target' => $target,
+				'propertyNameWithExpectedExecutable' => $target . '.default.executable',
+				'propertyNameWithExpectedApp' => $target . '.test.app',
+			];
+		})();
+
+		yield 'call command with custom executable and app' => (static function (): array {
+			$target = 'call-command-with-custom-executable-and-app';
+
+			return [
+				'target' => $target,
+				'propertyNameWithExpectedExecutable' => $target . '.test.executable',
+				'propertyNameWithExpectedApp' => $target . '.test.app',
+			];
+		})();
+
+		yield 'call command and override defaults' => (static function (): array {
+			$target = 'call-command-and-override-defaults';
+
+			return [
+				'target' => $target,
+				'propertyNameWithExpectedExecutable' => $target . '.test.executable',
+				'propertyNameWithExpectedApp' => $target . '.test.app',
+			];
+		})();
 	}
 
-	public function testCallCommandWithCustomExecutable(): void
+	/**
+	 * @dataProvider callCommandDataProvider
+	 *
+	 * @param string $target
+	 * @param string $propertyNameWithExpectedExecutable
+	 * @param string $propertyNameWithExpectedApp
+	 */
+	public function testCallCommand(
+		string $target,
+		string $propertyNameWithExpectedExecutable,
+		string $propertyNameWithExpectedApp
+	): void
 	{
 		$tester = new PhingTester(__DIR__ . '/symfony-command-task-integration-test.xml');
-		$target = __FUNCTION__;
 		$tester->executeTarget($target);
+
+		$expectedExecutable = $tester->getProject()->getProperty($propertyNameWithExpectedExecutable);
+		$expectedApp = $tester->getProject()->getProperty($propertyNameWithExpectedApp);
+		Type::checkType($expectedExecutable, 'string');
+		Type::checkType($expectedApp, 'string');
 
 		$tester->assertLogMessageRegExp(sprintf(
 			'~executing.+%s.+%s.+hello:world~i',
-			$tester->getProject()->getProperty(__FUNCTION__ . '.test.executable'),
-			$tester->getProject()->getProperty(__FUNCTION__ . '.default.app')
-		), $target, Project::MSG_VERBOSE);
-	}
-
-	public function testCallCommandWithCustomApp(): void
-	{
-		$tester = new PhingTester(__DIR__ . '/symfony-command-task-integration-test.xml');
-		$target = __FUNCTION__;
-		$tester->executeTarget($target);
-
-		$tester->assertLogMessageRegExp(sprintf(
-			'~executing.+%s.+%s.+hello:world~i',
-			$tester->getProject()->getProperty(__FUNCTION__ . '.default.executable'),
-			$tester->getProject()->getProperty(__FUNCTION__ . '.test.app')
-		), $target, Project::MSG_VERBOSE);
-	}
-
-	public function testCallCommandWithCustomExecutableAndApp(): void
-	{
-		$tester = new PhingTester(__DIR__ . '/symfony-command-task-integration-test.xml');
-		$target = __FUNCTION__;
-		$tester->executeTarget($target);
-
-		$tester->assertLogMessageRegExp(sprintf(
-			'~executing.+%s.+%s.+hello:world~i',
-			$tester->getProject()->getProperty(__FUNCTION__ . '.test.executable'),
-			$tester->getProject()->getProperty(__FUNCTION__ . '.test.app')
+			$expectedExecutable,
+			$expectedApp
 		), $target, Project::MSG_VERBOSE);
 	}
 
 	public function testCallCommandWithAppAsExecutable(): void
 	{
 		$tester = new PhingTester(__DIR__ . '/symfony-command-task-integration-test.xml');
-		$target = __FUNCTION__;
+		$target = 'call-command-with-app-as-executable';
 		$tester->executeTarget($target);
+
+		$expectedApp = $tester->getProject()->getProperty($target . '.test.app');
+		Type::checkType($expectedApp, 'string');
 
 		$tester->assertLogMessageRegExp(sprintf(
 			'~executing.+%s.+hello:world~i',
-			$tester->getProject()->getProperty(__FUNCTION__ . '.test.app')
-		), $target, Project::MSG_VERBOSE);
-	}
-
-	public function testCallCommandAndOverrideDefaults(): void
-	{
-		$tester = new PhingTester(__DIR__ . '/symfony-command-task-integration-test.xml');
-		$target = __FUNCTION__;
-		$tester->executeTarget($target);
-
-		$tester->assertLogMessageRegExp(sprintf(
-			'~executing.+%s.+%s.+hello:world~i',
-			$tester->getProject()->getProperty(__FUNCTION__ . '.test.executable'),
-			$tester->getProject()->getProperty(__FUNCTION__ . '.test.app')
+			$expectedApp
 		), $target, Project::MSG_VERBOSE);
 	}
 
 	public function testMissingApp(): void
 	{
-		$tester = new PhingTester(__DIR__ . '/symfony-command-task-integration-test.xml');
-		$target = __FUNCTION__;
+		$buildFilePath = __DIR__ . '/symfony-command-task-integration-test.xml';
+		$tester = new PhingTester($buildFilePath);
+		$target = 'missing-app';
 
-		$this->expectException(\BuildException::class);
-		$this->expectExceptionMessageMatches('~app.+required~');
-
-		$tester->executeTarget($target);
+		try {
+			$tester->executeTarget($target);
+			Assert::fail('Exception expected');
+		} catch (\BuildException $e) {
+			Assert::assertStringStartsWith($buildFilePath, $e->getLocation()->toString());
+			Assert::assertRegExp('~app.+required~', $e->getMessage());
+		}
 	}
 
 }
