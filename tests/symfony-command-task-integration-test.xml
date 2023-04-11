@@ -19,9 +19,9 @@
 		<property name="testCallCommandWithCustomExecutable.default.app" value="${project.basedir}/console"/>
 		<property name="symfony-command.default.app" value="${testCallCommandWithCustomExecutable.default.app}"/>
 
-		<property name="testCallCommandWithCustomApp.test.executable" value="php"/>
+		<property name="testCallCommandWithCustomExecutable.test.executable" value="php"/>
 
-		<symfony-cmd executable="${testCallCommandWithCustomApp.test.executable}" cmd="hello:world"/>
+		<symfony-cmd executable="${testCallCommandWithCustomExecutable.test.executable}" cmd="hello:world"/>
 	</target>
 
 	<target name="testCallCommandWithCustomApp">
