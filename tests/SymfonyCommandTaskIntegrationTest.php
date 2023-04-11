@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace VasekPurchart\Phing\SymfonyCommand;
 
+use Consistence\Type\Type;
 use Generator;
 use PHPUnit\Framework\Assert;
 use Project;
@@ -84,10 +85,15 @@ class SymfonyCommandTaskIntegrationTest extends \PHPUnit\Framework\TestCase
 		$tester = new PhingTester(__DIR__ . '/symfony-command-task-integration-test.xml');
 		$tester->executeTarget($target);
 
+		$expectedExecutable = $tester->getProject()->getProperty($propertyNameWithExpectedExecutable);
+		$expectedApp = $tester->getProject()->getProperty($propertyNameWithExpectedApp);
+		Type::checkType($expectedExecutable, 'string');
+		Type::checkType($expectedApp, 'string');
+
 		$tester->assertLogMessageRegExp(sprintf(
 			'~executing.+%s.+%s.+hello:world~i',
-			$tester->getProject()->getProperty($propertyNameWithExpectedExecutable),
-			$tester->getProject()->getProperty($propertyNameWithExpectedApp)
+			$expectedExecutable,
+			$expectedApp
 		), $target, Project::MSG_VERBOSE);
 	}
 
@@ -97,9 +103,12 @@ class SymfonyCommandTaskIntegrationTest extends \PHPUnit\Framework\TestCase
 		$target = 'call-command-with-app-as-executable';
 		$tester->executeTarget($target);
 
+		$expectedApp = $tester->getProject()->getProperty($target . '.test.app');
+		Type::checkType($expectedApp, 'string');
+
 		$tester->assertLogMessageRegExp(sprintf(
 			'~executing.+%s.+hello:world~i',
-			$tester->getProject()->getProperty($target . '.test.app')
+			$expectedApp
 		), $target, Project::MSG_VERBOSE);
 	}
 
